@@ -1,4 +1,4 @@
-#Pull headline, title, author, date for each headline in https://www.realclearpolitics.com/2019/11/11/ and append to a list.
+#Pull link, title, author, date for each headline in https://www.realclearpolitics.com/2019/11/11/ and append to a list.
 
 import json
 import requests
@@ -14,15 +14,23 @@ html_file = response.text
 
 rcp_final_list = []
 
-def print_headlines(html):
+def get_all_link_tags(html):
         soup = BeautifulSoup(html, 'lxml')
         title_tags = soup.find_all(attrs={"class": "title"})
         all_link_tags = []
         for tag in title_tags:
-            links = tag.find_all('a')
-            all_link_tags.append(links)
-        return all_links
+            link_tag = tag.find_all('a')
+            all_link_tags.extend(link_tag)
+        return all_link_tags
         
-all_links = print_headlines(html_file)
-for link in all links:
-    print(link)
+all_link_tags = get_all_link_tags(html_file)
+all_links = []
+for link in all_link_tags:
+    link = link.attrs['href']
+    all_links.append(link)
+
+print(all_links)    
+
+
+
+
