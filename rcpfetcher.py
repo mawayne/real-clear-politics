@@ -3,7 +3,6 @@
 # Import requirements
 import json
 import requests
-import time
 from bs4 import BeautifulSoup
 
 # Create base_url variable
@@ -107,9 +106,9 @@ def rcp_fetcher(posts):
         title = url_link_tag.getText()
         author = author_link_tag.getText()
         source = source_tag.getText()
-        list.append({link, title, author, source, date})
+        list.append({'url': link, 'title': title, 'author': author, 'source': source, 'date': date})
     return list
-
+    
 rcp_final_list = rcp_fetcher(all_post_tags)
 
 for dict in rcp_final_list:
