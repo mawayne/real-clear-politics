@@ -1,4 +1,4 @@
-# Objective: Pull link, title, date, author, publication for each headline in https://www.realclearpolitics.com/2019/11/11/ and append to a list.
+# # Objective: Pull link, title, date, author, publication for each headline in https://www.realclearpolitics.com/2019/11/11/ and append to a list.
 
 # Import requirements
 import json
@@ -39,7 +39,8 @@ for link in url_link_tags:
     link = link.attrs['href']
     all_url_links.append(link)
 
-print(all_url_links)
+for url_link in all_url_links:
+    print(url_link)
 
 # Fetch titles
 url_link_tags = get_url_link_tags(html_file)
@@ -48,7 +49,8 @@ for title in url_link_tags:
     title = title.getText()
     all_titles.append(title)
 
-print(all_titles)
+for title in all_titles:
+    print(title)
 
 # Fetch authors
 def get_author_link_tags(html):
@@ -66,7 +68,86 @@ for author in author_link_tags:
     author = author.getText()
     all_authors.append(author)
 
-print(all_authors)
+for author in all_authors:
+    print(author)
+
+# Fetch sources
+soup = BeautifulSoup(html_file, 'lxml')
+source_tags = soup.find_all(attrs={"class": "source"})
+all_sources = []
+for source in source_tags:
+    source = source.getText()
+    all_sources.append(source)
+
+for source in all_sources:
+    print(source)
+
+# Combine into one program
+def get_post_tags(html):
+        soup = BeautifulSoup(html, 'lxml')
+        post_tags = soup.find_all(attrs={"class": "post"})
+        all_post_tags = []      
+        for tag in post_tags:
+            all_post_tags.append(tag)
+        return all_post_tags
+
+all_post_tags = get_post_tags(html_file)
+
+def rcp_fetcher(posts):
+    for post in all_post_tags:
+        link = link.attrs['href']
+        rcp_final_list.append(link)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def rcp_posts_fetcher(tags):
+#     for post_tag in all_post_tags:
+#         title_tags = soup.find_all(attrs={"class": "title"})
+#         for tag in title_tags:
+#             link_tag = tag.find_all('a')
+#             rcp_final_list.(link_tag)
+
+
+
+        
+
+    
 
 
 
