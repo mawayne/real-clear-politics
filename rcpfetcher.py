@@ -82,34 +82,34 @@ rcp_final_list = []
 #     print(source)
 
 # Combine into one program
-def get_post_tags(html):
+def get_post_class(html):
         soup = BeautifulSoup(html, 'lxml')
-        post_tags = soup.find_all(attrs={"class": "post"})
-        all_post_tags = []      
-        for tag in post_tags:
-            all_post_tags.append(tag)
-        return all_post_tags
+        post_class = soup.find_all(attrs={"class": "post"})
+        all_post_class = []      
+        for item in post_class:
+            all_post_class.append(item)
+        return all_post_class
 
-all_post_tags = get_post_tags(html_file)
+all_post_class = get_post_class(html_file)
 
 def rcp_fetcher(posts):
     list = []
-    for post in all_post_tags:
-        title_tag = post.find(attrs={"class": "title"})
-        byline_tag = post.find(attrs={"class": "byline"})
-        if byline_tag == None:
+    for post in all_post_class:
+        title_class = post.find(attrs={"class": "title"})
+        byline_class = post.find(attrs={"class": "byline"})
+        if byline_class == None:
             continue
-        source_tag = post.find(attrs={"class": "source"})
-        url_link_tag = title_tag.find('a')
-        author_link_tag = byline_tag.find('a')
+        source_class = post.find(attrs={"class": "source"})
+        url_link_tag = title_class.find('a')
+        author_link_tag = byline_class.find('a')
         link = url_link_tag.attrs['href']
         title = url_link_tag.getText()
         author = author_link_tag.getText()
-        source = source_tag.getText()
+        source = source_class.getText()
         list.append({'url': link, 'title': title, 'author': author, 'source': source, 'date': date})
     return list
     
-rcp_final_list = rcp_fetcher(all_post_tags)
+rcp_final_list = rcp_fetcher(all_post_class)
 
 for dict in rcp_final_list:
     print(dict)
