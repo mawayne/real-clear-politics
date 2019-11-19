@@ -17,7 +17,7 @@ user_agent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_1) AppleWebKit/537.36
 headers = {'User-Agent': user_agent}
 
 response = requests.get(url, headers=headers)
-html_file = response.text
+html = response.text
 
 # Create empty data list
 rcp_final_list = []
@@ -82,23 +82,16 @@ rcp_final_list = []
 #     print(source)
 
 # Combine into one program
-def get_post_class(html):
-        soup = BeautifulSoup(html, 'lxml')
-        post_class = soup.find_all(attrs={"class": "post"})
-        all_post_class = []      
-        for item in post_class:
-            all_post_class.append(item)
-        return all_post_class
 
-all_post_class = get_post_class(html_file)
+soup = BeautifulSoup(html, 'lxml')
+post_tags = soup.find_all(attrs={"class": "post"})
 
-def rcp_fetcher(posts):
-    list = []
-    for post in all_post_class:
+headlines = []
+for post in post_tags:
         title_class = post.find(attrs={"class": "title"})
         byline_class = post.find(attrs={"class": "byline"})
         if byline_class == None:
-            continue
+                continue
         source_class = post.find(attrs={"class": "source"})
         url_link_tag = title_class.find('a')
         author_link_tag = byline_class.find('a')
@@ -106,60 +99,9 @@ def rcp_fetcher(posts):
         title = url_link_tag.getText()
         author = author_link_tag.getText()
         source = source_class.getText()
-        list.append({'url': link, 'title': title, 'author': author, 'source': source, 'date': date})
-    return list
-    
-rcp_final_list = rcp_fetcher(all_post_class)
+        headlines.append({'url': link, 'title': title, 'author': author, 'source': source, 'date': date})
 
-for dict in rcp_final_list:
-    print(dict)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-    
-
+for headline in headlines:
+    print(headline['title'])
 
 
