@@ -13,7 +13,7 @@ def daterange(date1, date2):
     for n in range(int ((date2 - date1).days)+1):
         yield date1 + timedelta(n)
 
-def build_headline(post_tag):
+def build_headline(post, dt):
     title_class = post.find(attrs={"class": "title"})
     byline_class = post.find(attrs={"class": "byline"})
     if byline_class == None:
@@ -33,8 +33,7 @@ def build_headline(post_tag):
     return headline
     
 
-if __name__ == '__main__':
-
+def get_headlines():
     # Create base_url variable
     base_url = 'https://www.realclearpolitics.com'
     # Create date range
@@ -57,9 +56,14 @@ if __name__ == '__main__':
         post_tags = soup.find_all(attrs={"class": "post"})
         # Extract headline data
         for post in post_tags:
-            headline = build_headline(post)
+            headline = build_headline(post, dt)
             headlines.append(headline)
+    return headlines
+
+
+if __name__ == '__main__':
     # Extract targeted info
+    headlines = get_headlines()
     for headline in headlines:
         clinton_mentions = 0
         if headline is None:
