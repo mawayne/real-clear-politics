@@ -59,12 +59,15 @@ if __name__ == '__main__':
         for post in post_tags:
             headline = build_headline(post)
             headlines.append(headline)
-    # # Extract targeted info
-    # for headline in headlines:
-    #     if headline is None:
-    #         continue
-    #     print(headline['title'])
-
-for headline in headlines[:10]:
-    print(headline)
-
+    # Extract targeted info
+    for headline in headlines:
+        clinton_mentions = 0
+        if 'Clinton' in headline['title'] == True:
+            clinton_mentions = clinton_mentions + 1
+        elif 'Clintons' in headline['title'] == True:
+            clinton_mentions = clinton_mentions + 1
+        elif headline['title'] == None:
+            continue
+        else:
+            clinton_mentions = 0
+    print(clinton_mentions)
