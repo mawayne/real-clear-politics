@@ -29,7 +29,7 @@ def build_headline(post_tag):
     title = url_link_tag.getText()
     author = author_link_tag.getText()
     source = source_class.getText()
-    headline = {'url': link, 'title': title, 'author': author, 'source': source, 'date': date}
+    headline = {'url': link, 'title': title, 'author': author, 'source': source, 'date': dt}
     return headline
     
 
@@ -59,12 +59,12 @@ if __name__ == '__main__':
         for post in post_tags:
             headline = build_headline(post)
             headlines.append(headline)
-    # # Extract relevant info
+    # # Extract targeted info
     # for headline in headlines:
     #     if headline is None:
     #         continue
     #     print(headline['title'])
 
-for headline in headlines[:40]:
+for headline in headlines[:10]:
     print(headline)
 
