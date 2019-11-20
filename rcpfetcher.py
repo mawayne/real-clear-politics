@@ -73,24 +73,19 @@ if __name__ == '__main__':
     with open(data_file, 'r') as f:
         headlines = json.load(f)
 
-    clinton_mentions = 0
+    nyt_count = 0
+    fox_news_count = 0
     for headline in headlines:
-        # clinton_mentions = 0
         if headline is None:
             continue
-        if 'Hillary' in headline['title']:
-            clinton_mentions = clinton_mentions + 1
-        elif 'Clinton' in headline['title']:
-            clinton_mentions = clinton_mentions + 1
-        elif 'Clintons' in headline['title']:
-            clinton_mentions = clinton_mentions + 1
-        elif headline['title'] == None:
-            continue
-
-    print('A combination of "Hilary", "Clinton" and/or "Clintons" has been the topic of discussion of ' + str(clinton_mentions) + ' articles since the impeachment began.')
-        
-
-
-
-
-
+        if headline['source'] == "New York Times":
+            nyt_count = nyt_count + 1
+        if headline['source'] == "FOX News":
+            fox_news_count = fox_news_count + 1
+    
+    if nyt_count > fox_news_count:
+        print('There are ' + str(nyt_count - fox_news_count) + ' more New York Times articles than FOX News articles since impeachment began.')
+    if fox_news_count > nyt_count:
+        print('There are ' + str(fox_news_count - nyt_count) + ' more FOX News articles than New York Times articles since impeachment began.')
+    else:
+        print('The New York Times and FOX News are equally prevalent since impeachment began.')
