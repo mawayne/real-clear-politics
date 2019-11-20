@@ -62,6 +62,8 @@ if __name__ == '__main__':
     # Extract targeted info
     for headline in headlines:
         clinton_mentions = 0
+        if headline is None:
+            continue
         if 'Clinton' in headline['title'] == True:
             clinton_mentions = clinton_mentions + 1
         elif 'Clintons' in headline['title'] == True:
