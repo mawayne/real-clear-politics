@@ -78,23 +78,16 @@ if __name__ == '__main__':
         # clinton_mentions = 0
         if headline is None:
             continue
-
-        #print(headline['title'])
-
         if 'Hillary' in headline['title']:
-            print('Hillary')
             clinton_mentions = clinton_mentions + 1
         elif 'Clinton' in headline['title']:
-            print('Clinton')
             clinton_mentions = clinton_mentions + 1
         elif 'Clintons' in headline['title']:
-            print('Clintons')
             clinton_mentions = clinton_mentions + 1
         elif headline['title'] == None:
             continue
-        # else:
-        #    clinton_mentions = 0
-    print(clinton_mentions)
+
+    print('A combination of "Hilary", "Clinton" and/or "Clintons" has been the topic of discussion of ' + str(clinton_mentions) + ' articles since the impeachment began.')
         
 
 
