@@ -72,19 +72,21 @@ if __name__ == '__main__':
 
     with open(data_file, 'r') as f:
         headlines = json.load(f)
-        for headline in headlines:
-            if headline is None:
-                continue
-            string = headline['source']
-            nyt_count = (string.count("New York Times"))
-        print(nyt_count)
-        #     fox_news_count = (string.count("FOX News"))
-        # if nyt_count > fox_news_count:
-        #         print('The New York Times articles have been displayed ' + str(nyt_count - fox_news_count) + ' more times than FOX News.')
-        # elif fox_news_count > nyt_count:
-        #         print('FOX news articles have been displayed ' + str(fox_news_count - nyt_count) + ' more times than the New York Times.')
-        # else:
-        #         print('The New York Times and FOX News have been equally represented.')
+
+    for headline in headlines:
+        if headline is None:
+            continue
+        string = headline["source"]
+        nyt_count = (string.count("New York Times"))
+        fox_news_count = (string.count("FOX News"))
+
+    print(nyt_count)
+    # if nyt_count > fox_news_count:
+    #         print('The New York Times articles have been displayed ' + str(nyt_count - fox_news_count) + ' more times than FOX News.')
+    # elif fox_news_count > nyt_count:
+    #         print('FOX news articles have been displayed ' + str(fox_news_count - nyt_count) + ' more times than the New York Times.')
+    # else:
+    #         print('The New York Times and FOX News have been equally represented.')
         
 
 
