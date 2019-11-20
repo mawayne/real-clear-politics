@@ -70,22 +70,24 @@ if __name__ == '__main__':
     # with open(data_file, 'w') as f:
     #     json.dump(headlines, f)
 
-    with open(data_file, 'r') as f:
+with open(data_file, 'r') as f:
         headlines = json.load(f)
 
-    nyt_count = 0
-    fox_news_count = 0
-    for headline in headlines:
-        if headline is None:
-            continue
-        if headline['source'] == "New York Times":
-            nyt_count = nyt_count + 1
-        if headline['source'] == "FOX News":
-            fox_news_count = fox_news_count + 1
-    
-    if nyt_count > fox_news_count:
-        print('There are ' + str(nyt_count - fox_news_count) + ' more New York Times articles than FOX News articles since impeachment began.')
-    if fox_news_count > nyt_count:
-        print('There are ' + str(fox_news_count - nyt_count) + ' more FOX News articles than New York Times articles since impeachment began.')
-    else:
-        print('The New York Times and FOX News are equally prevalent since impeachment began.')
+watergate_mentions = 0
+for headline in headlines:
+    if headline is None:
+        continue
+    if 'Watergate' in headline['title']:
+        watergate_mentions = watergate_mentions + 1
+    elif 'Nixon' in headline['title']:
+        watergate_mentions = watergate_mentions + 1
+    elif 'Deep Throat' in headline['title']:
+        watergate_mentions = watergate_mentions + 1
+    elif 'smoking gun' in headline['title'].lower():
+        watergate_mentions = watergate_mentions + 1
+    elif 'Woodward' in headline['title']:
+        watergate_mentions = watergate_mentions + 1
+    elif 'Bernstein' in headline['title']:
+        watergate_mentions = watergate_mentions + 1
+
+print("Topics related to Nixon's impeachment have been mentioned approximately " + str(watergate_mentions) + " times since Trump's impeachment inquiry began.")
