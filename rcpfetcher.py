@@ -64,6 +64,15 @@ def get_headlines():
 if __name__ == '__main__':
     # Extract targeted info
     headlines = get_headlines()
+    
+    data_file = 'headlines.json'
+
+    with open(data_file, 'w') as f:
+        json.dump(headlines, f)
+
+    with open(data_file, 'r') as f:
+        headlines = json.load(f)
+
     for headline in headlines:
         clinton_mentions = 0
         if headline is None:
