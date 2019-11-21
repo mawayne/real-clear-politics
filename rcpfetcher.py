@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import datetime
 from datetime import timedelta, date
 import time 
+import csv
 
 # Create necessary functions
 def daterange(date1, date2):
@@ -16,20 +17,21 @@ def daterange(date1, date2):
 def build_headline(post, dt):
     title_class = post.find(attrs={"class": "title"})
     byline_class = post.find(attrs={"class": "byline"})
-    if byline_class == None:
+    if byline_class is None:
         return
     source_class = post.find(attrs={"class": "source"})
-    if source_class == None:
-        return
+    if source_class is None:
+        source = 'Unknown'
+    else:
+        source = source_class.getText()
     url_link_tag = title_class.find('a')
     author_link_tag = byline_class.find('a')
-    if author_link_tag == None:
+    if author_link_tag is None:
         return
     link = url_link_tag.attrs['href']
     title = url_link_tag.getText()
     author = author_link_tag.getText()
-    source = source_class.getText()
-    headline = {'url': link, 'title': title, 'author': author, 'source': source, 'date': dt}
+    headline = {'URL': link, 'Title': title, 'Author': author, 'Source': source, 'Date': dt}
     return headline
     
 
@@ -57,7 +59,8 @@ def get_headlines():
         # Extract headline data
         for post in post_tags:
             headline = build_headline(post, dt)
-            headlines.append(headline)
+            if headline is not None:
+                headlines.append(headline)
     return headlines
 
 
@@ -70,24 +73,14 @@ if __name__ == '__main__':
     # with open(data_file, 'w') as f:
     #     json.dump(headlines, f)
 
-with open(data_file, 'r') as f:
+    with open(data_file, 'r') as f:
         headlines = json.load(f)
 
-watergate_mentions = 0
-for headline in headlines:
-    if headline is None:
-        continue
-    if 'Watergate' in headline['title']:
-        watergate_mentions = watergate_mentions + 1
-    elif 'Nixon' in headline['title']:
-        watergate_mentions = watergate_mentions + 1
-    elif 'Deep Throat' in headline['title']:
-        watergate_mentions = watergate_mentions + 1
-    elif 'smoking gun' in headline['title'].lower():
-        watergate_mentions = watergate_mentions + 1
-    elif 'Woodward' in headline['title']:
-        watergate_mentions = watergate_mentions + 1
-    elif 'Bernstein' in headline['title']:
-        watergate_mentions = watergate_mentions + 1
+csv_file = 'headlines.csv'
+csv_columns = ['URL', 'Title', 'Author', 'Source', 'Date']
 
-print("Topics related to Nixon's impeachment have been mentioned approximately " + str(watergate_mentions) + " times since Trump's impeachment inquiry began.")
+with open(csv_file, 'w') as csvfile:
+    writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+    writer.writeheader()
+    for headline in headlines:
+        writer.writerow(headline)
