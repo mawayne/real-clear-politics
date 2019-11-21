@@ -68,6 +68,17 @@ if __name__ == '__main__':
     # Extract targeted info
     # headlines = get_headlines()
 
+    # Store headlines in CSV file
+    # csv_file = 'headlines.csv'
+    # csv_columns = ['URL', 'Title', 'Author', 'Source', 'Date']
+
+    # with open(csv_file, 'w') as csvfile:
+    #     writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+    #     writer.writeheader()
+    #     for headline in headlines:
+    #         writer.writerow(headline)
+
+    # Store headlines in JSON file
     data_file = 'headlines.json'
 
     # with open(data_file, 'w') as f:
@@ -75,12 +86,3 @@ if __name__ == '__main__':
 
     with open(data_file, 'r') as f:
         headlines = json.load(f)
-
-csv_file = 'headlines.csv'
-csv_columns = ['URL', 'Title', 'Author', 'Source', 'Date']
-
-with open(csv_file, 'w') as csvfile:
-    writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
-    writer.writeheader()
-    for headline in headlines:
-        writer.writerow(headline)
