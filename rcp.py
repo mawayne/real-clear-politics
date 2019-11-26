@@ -9,9 +9,9 @@ def home():
 @app.route('/headlines')
 def send_headlines():
     data_file = 'headlines.json'
-    with open(data_file, 'r') as f:
+    with open(data_file) as f:
         headlines = json.load(f)
-        return jsonify([headline for headline in headlines])
+        return jsonify(headlines)
 
 if __name__ == '__main__':
        app.run(debug=True)
