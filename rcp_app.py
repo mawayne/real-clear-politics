@@ -9,7 +9,7 @@ def home():
 @app.route('/headlines/<path:filename>')
 def send_headlines(filename):
        headlines = send_from_directory(app.static_folder, 'headlines.json')
-       return jsonify(headlines)
+       return headlines
 
 if __name__ == '__main__':
        app.run(debug=True)
