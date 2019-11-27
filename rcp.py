@@ -11,7 +11,7 @@ def send_headlines():
     data_file = 'headlines.json'
     with open(data_file) as f:
         headlines = json.load(f)
-        return jsonify(headlines[:10])
+        return jsonify(headlines)
 
 if __name__ == '__main__':
        app.run(debug=True)
