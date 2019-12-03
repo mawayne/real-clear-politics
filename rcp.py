@@ -1,5 +1,4 @@
-from flask import Flask, jsonify, json
-import requests 
+from flask import Flask, jsonify, json, request
 import json
 
 app = Flask(__name__)
@@ -15,15 +14,13 @@ def send_headlines():
         headlines = json.load(f)
         return jsonify(headlines)
 
-url = 'http://127.0.0.1:5000/headlines/country'
-headers = {'Content-Type': 'application/json'}
+@app.route('/headlines/syria')
+def headlines_syria():
+        title = request.args.get('Title')
 
-filters = [dict(name='Title', op='==', val='%Syria%')]
-params = dict(q=json.dumps(dict(filters=filters)))
+        return "i'm the man"
 
-response = requests.get(url, params=params, headers=headers)
-assert response.status_code == 200
-print(response.json())
+        
 
 if __name__ == '__main__':
        app.run(debug=True)
