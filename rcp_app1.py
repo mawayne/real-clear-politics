@@ -17,15 +17,30 @@ def send_headlines_all():
 
 @app.route('/headlines', methods=['GET'])
 def headlines_sources():
+    if 'author' in request.args:
+        headlines_title = request.args['title']
+    
+    if 'date' in request.args:
+        headlines_title = request.args['title']
+
     if 'source' in request.args:
         headlines_source = request.args['source']
+    
+    if 'title' in request.args:
+        headlines_title = request.args['title']
 
+    if 'url' in request.args:
+        headlines_title = request.args['title']
+    
     source_results = []
 
-    for headline in headlines:
-        if headline['source'] == headlines_source:
-            source_results.append(headline)
-    return jsonify(source_results)
+    # for headline in headlines:
+    #     if headline['source'] == headlines_source:
+    #         source_results.append(headline)
+    # return jsonify(source_results)
+
+    # for headline in headlines:
+    #     if headline['title'] == 
 
 if __name__ == '__main__':
     app.run(debug=True)
