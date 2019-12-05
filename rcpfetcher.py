@@ -31,7 +31,7 @@ def build_headline(post, dt):
     link = url_link_tag.attrs['href']
     title = url_link_tag.getText()
     author = author_link_tag.getText()
-    headline = {'URL': link, 'Title': title, 'Author': author, 'Source': source, 'Date': dt}
+    headline = {'url': link, 'title': title, 'author': author, 'source': source, 'date': dt}
     return headline
     
 
@@ -70,7 +70,7 @@ if __name__ == '__main__':
 
     # Store headlines in CSV file
     csv_file = 'headlines.csv'
-    csv_columns = ['URL', 'Title', 'Author', 'Source', 'Date']
+    csv_columns = ['url', 'title', 'author', 'source', 'date']
 
     with open(csv_file, 'w') as csvfile:
         writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
