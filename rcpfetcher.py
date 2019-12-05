@@ -65,18 +65,18 @@ def get_headlines():
 
 
 if __name__ == '__main__':
-    # Extract targeted info
-    headlines = get_headlines()
+    # # Extract targeted info
+    # headlines = get_headlines()
 
     # Store headlines in CSV file
     csv_file = 'headlines.csv'
     csv_columns = ['url', 'title', 'author', 'source', 'date']
 
-    with open(csv_file, 'w') as csvfile:
-        writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
-        writer.writeheader()
-        for headline in headlines:
-            writer.writerow(headline)
+    # with open(csv_file, 'w') as csvfile:
+    #     writer = csv.DictWriter(csvfile, fieldnames=csv_columns)
+    #     writer.writeheader()
+    #     for headline in headlines:
+    #         writer.writerow(headline)
 
     # Store headlines in JSON file
     data_file = 'headlines.json'
@@ -86,3 +86,5 @@ if __name__ == '__main__':
 
     with open(data_file, 'r') as f:
         headlines = json.load(f)
+        for headline in headlines:
+            print(type(headline['date']))
