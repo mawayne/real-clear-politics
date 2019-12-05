@@ -23,11 +23,11 @@ def send_headlines_all():
 
 @app.route('/headlines', methods=['GET'])
 def headlines_sources():
-    if 'author' in request.args:
-        headlines_author = request.args['title']
+    # if 'author' in request.args:
+    #     headlines_author = request.args['title']
     
-    if 'date' in request.args:
-        headlines_date = request.args['title']
+    # if 'date' in request.args:
+    #     headlines_date = request.args['title']
 
     if 'source' in request.args:
         headlines_source = request.args['source']
@@ -35,8 +35,8 @@ def headlines_sources():
     if 'title' in request.args:
         headlines_title = request.args['title']
 
-    if 'url' in request.args:
-        headlines_url = request.args['title']
+    # if 'url' in request.args:
+    #     headlines_url = request.args['title']
     
     source_results = []
 
