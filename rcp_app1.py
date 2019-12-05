@@ -7,6 +7,12 @@ data_file = 'headlines.json'
 with open(data_file) as f:
     headlines = json.load(f)
 
+headlines_author = []
+headlines_date = []
+headlines_source = []
+headlines_title = []
+headlines_url = []
+
 @app.route('/')
 def home():
     return ('Hello, Biatch!')
@@ -18,10 +24,10 @@ def send_headlines_all():
 @app.route('/headlines', methods=['GET'])
 def headlines_sources():
     if 'author' in request.args:
-        headlines_title = request.args['title']
+        headlines_author = request.args['title']
     
     if 'date' in request.args:
-        headlines_title = request.args['title']
+        headlines_date = request.args['title']
 
     if 'source' in request.args:
         headlines_source = request.args['source']
@@ -30,17 +36,21 @@ def headlines_sources():
         headlines_title = request.args['title']
 
     if 'url' in request.args:
-        headlines_title = request.args['title']
+        headlines_url = request.args['title']
     
     source_results = []
 
     # for headline in headlines:
-    #     if headline['source'] == headlines_source:
-    #         source_results.append(headline)
+        # if headlines_source in headline['source']:
+        #     source_results.append(headline)    
     # return jsonify(source_results)
 
-    # for headline in headlines:
-    #     if headline['title'] == 
+    for headline in headlines:
+        # if headlines_source in headline['source']:
+        #     source_results.append(headline)
+        if headlines_title in headline['title']:
+            source_results.append(headline) 
+    return jsonify(source_results)
 
 if __name__ == '__main__':
     app.run(debug=True)
